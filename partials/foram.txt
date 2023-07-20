@@ -1,0 +1,57 @@
+CREATE DATABASE forum;
+
+CREATE TABLE users(
+	user_name VARCHAR(10) NOT NULL,
+	user_email VARCHAR(254) NOT NULL,
+    user_fullname VARCHAR(40) NULL,
+    user_password VARCHAR(255) NOT NULL,
+    user_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	
+	PRIMARY KEY (user_name),
+	UNIQUE(user_email)    
+);
+
+CREATE TABLE categories(
+	category_id VARCHAR(5) NOT NULL,
+	
+	category_name VARCHAR(20) NOT NULL,
+	category_description VARCHAR(1000) NOT NULL,
+	
+	PRIMARY KEY (category_id)
+);
+
+CREATE TABLE questions(
+	question_id INT(10) NOT NULL AUTO_INCREMENT,
+	category_id VARCHAR(5) NOT NULL,
+	user_name VARCHAR(10) NOT NULL, 
+	
+	question_tittle VARCHAR(200) NOT NULL,
+	question_description VARCHAR(2000) NOT NULL,
+	question_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	
+	PRIMARY KEY (question_id),
+	FOREIGN KEY (category_id) REFERENCES categories (category_id),
+	FOREIGN KEY (user_name) REFERENCES users (user_name)
+);
+
+CREATE TABLE answers(
+	answer_id INT(10) NOT NULL AUTO_INCREMENT,
+	question_id INT(10) NOT NULL,
+	user_name VARCHAR(10) NOT NULL,
+	
+	answer_description VARCHAR(2000) NOT NULL,
+	answer_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	
+	PRIMARY KEY (answer_id),
+	FOREIGN KEY (question_id) REFERENCES questions (question_id),
+	FOREIGN KEY (user_name) REFERENCES users (user_name)
+);
+
+INSERT INTO `categories` (`category_id`, `category_name`, `category_description`) VALUES ('C', 'C', 'C programming is a general-purpose, procedural, imperative computer programming language developed in 1972 by Dennis M. Ritchie at the Bell Telephone Laboratories to develop the UNIX operating system. C is the most widely used computer language.');
+
+INSERT INTO `categories` (`category_id`, `category_name`, `category_description`) VALUES ('Cpp', 'C++', 'C++ is an object-oriented programming language which gives a clear structure to programs and allows code to be reused, lowering development costs. C++ is portable and can be used to develop applications that can be adapted to multiple platforms.');
+
+INSERT INTO `categories` (`category_id`, `category_name`, `category_description`) VALUES ('Java', 'Java', 'Java is a class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.');
+
+INSERT INTO `categories` (`category_id`, `category_name`, `category_description`) VALUES ('Py', 'Python', 'Python is an interpreted, high-level and general-purpose programming language. Python\'s design philosophy emphasizes code readability with its notable use of significant whitespace.');
+
