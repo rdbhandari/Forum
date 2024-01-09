@@ -6,9 +6,6 @@
         header("location: /");
         exit();
     }
-    // if(empty($_SESSION['username']) == false){
-    //     echo "AMI BOKACHODA";
-    // }
 ?>
 
 <?php include $_SERVER['DOCUMENT_ROOT']."/partials/_header.php" ?>
